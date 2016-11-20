@@ -31,4 +31,22 @@ public class MapaDeReplicacao {
         buffWrite.append(linha + "\n");
         buffWrite.close();
     }
+    public static String Search(String path, String Pesq) throws IOException {
+        BufferedReader buffRead = new BufferedReader(new FileReader(path));
+        String linha = "";
+        while (true) {
+            if (linha != null) {
+                if(linha.contains(Pesq+":")){
+                	//System.out.println(linha);
+                	return linha;
+                }
+
+            } else
+                break;
+            linha = buffRead.readLine();
+        }
+        buffRead.close();
+        return "";
+    }
+    
 }
