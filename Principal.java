@@ -13,6 +13,7 @@ public class Principal {
         Proxy.read(path);
         System.out.println(MD5Result);
         Partition.addAll(Proxy.Search(path,MD5Result));
+        No.listFile("C:\\Users\\Thais\\Documents\\GitHub\\Distributed-File-System");  
        // Proxy.read(path);
 
     }
