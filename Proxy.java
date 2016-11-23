@@ -1,27 +1,15 @@
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.FileReader;
-import java.io.FileWriter;
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.math.BigInteger;
-import java.util.Scanner;
-import java.security.*;
- 
-public class Proxy extends MapaDeReplicacao{
+import java.rmi.Remote;
+import java.rmi.RemoteException;
+
+public interface Proxy extends Remote {
 	
-	public static String md5(String senha){
-		MessageDigest md = null;
-		try {
-			md = MessageDigest.getInstance("MD5");
-		} catch (NoSuchAlgorithmException e) {
-			e.printStackTrace();
-		}
-		BigInteger hash = new BigInteger(1, md.digest(senha.getBytes()));
-		float se = hash.floatValue();
-		float sr=se%3;
-		int t=(int)sr;
-		String s =Integer.toString(t);
-		return s;
-	}
+	public boolean createFile( String filename) throws RemoteException, FileNotFoundException, IOException;
+	public String readFile (String filename) throws RemoteException, FileNotFoundException, IOException;
+	public String searchPartition (String path, String key) throws RemoteException, FileNotFoundException, IOException;	 
+	public boolean status() throws RemoteException;
+
 
 }

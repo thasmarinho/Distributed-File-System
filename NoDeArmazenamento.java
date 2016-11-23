@@ -13,6 +13,8 @@ public class NoDeArmazenamento implements No {
 	static String Path;
 	static File Dir;
 
+	public NoDeArmazenamento() {}
+
 	public static List<File> listFile (String path) {
 
 		try {
@@ -75,6 +77,29 @@ public class NoDeArmazenamento implements No {
 
 	public static void main(String[] args) throws IOException {
 
+		System.out.println(" Porta: "); //refazer pra utilizar o args[] da main
+	    Scanner sc1 = new Scanner(System.in); 
+	    int PRT = sc1.nextInt();
+	    	
+	    System.out.println(" Diretorio: \n");
+	    Path = sc1.next();
+	    	
+	    Dir = new File(Path);
+
+		System.out.println(" Tentando levantar o NO \n");
+	        try {
+	            
+	        	NoDeArmazenamento obj = new NoDeArmazenamento();
+            	No stub = (No) UnicastRemoteObject.exportObject(obj, 0);
+            
+            	Registry registry = LocateRegistry.getRegistry(PRT);
+            	registry.bind("No", stub);
+				System.out.println(" Port:"+PRT);
+            	System.err.println("Ready");
+	            
+	        } catch (Exception e) {
+	            System.out.println("Server error: " + e.getMessage());
+	        }
 	}
 }
 
