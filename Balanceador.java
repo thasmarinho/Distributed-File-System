@@ -10,7 +10,7 @@ import java.rmi.server.UnicastRemoteObject;
 public class Balanceador implements RecursoComp {
 
 
-    public Server() {}
+    public Balanceador() {}
 
 	public String operation(String key, String id) throws RemoteException {
 		
