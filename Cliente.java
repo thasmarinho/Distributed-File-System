@@ -9,22 +9,25 @@ public class Cliente{
     public static void main(String[] args) {
 
         String host = (args.length < 1) ? null : args[0];
+        int porta = 1099;
         try {
-            boolean looping=true;
             BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-            Registry registry = LocateRegistry.getRegistry(host, 1099); //host, porta
-            
-            //mudar o stub
-            //RecursoComp stub = (RecursoComp) registry.lookup("RecursoComp");
+            Registry registry = LocateRegistry.getRegistry(host, porta); //host, porta
+            Balanceador stub = (Balanceador) registry.lookup("Balanceador");
 
-            System.out.println("Entre com o Identificador para esse processo"); //ver como o Ramyres fez. Portas talvez?
-            String id = br.readLine();
+           // System.out.println("Entre com o Identificador para esse processo"); //ver como o Ramyres fez. Portas talvez?
+           // String id = br.readLine();
 
-            System.out.println("entre a operacao que deseja ser feita: Criar[1] Ler[2] arquivo");
-            while(looping) {
+            porta = stub.getProxy();
+
+            Registry registry2 = LocateRegistry.getRegistry(host, porta);
+            Proxy stub2 = (Proxy) registry2.lookup("Proxy");     
+
+            System.out.println("entre a operacao que deseja ser feita: Criar[C] ou Ler[L] um arquivo");
+            while(true) {
                 String key = br.readLine();
                 try {
-                    String response = stub.operation(key,id);
+                    String response = stub2.operation(key); //bastaria fazer a operacao o restante o proxy se vira
                     System.out.print(response);
                 } catch (Exception e) {
                 System.err. println("Client exception: " + e.toString());
