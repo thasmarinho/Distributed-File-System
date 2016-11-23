@@ -15,8 +15,8 @@ public class Cliente{
             Registry registry = LocateRegistry.getRegistry(host, porta); //host, porta
             Balanceador stub = (Balanceador) registry.lookup("Balanceador");
 
-           // System.out.println("Entre com o Identificador para esse processo"); //ver como o Ramyres fez. Portas talvez?
-           // String id = br.readLine();
+      
+          
 
             porta = stub.getProxy();
 
