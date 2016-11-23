@@ -5,7 +5,7 @@ import java.rmi.RemoteException;
 
 public interface No extends Remote {
 	
-	public boolean createFile( String filename) throws RemoteException;
+	public boolean createFile(String filename) throws RemoteException;
 	public String readFile (String filename)throws RemoteException, FileNotFoundException ;
 
 }
