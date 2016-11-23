@@ -17,10 +17,10 @@ public class Cliente{
             //mudar o stub
             //RecursoComp stub = (RecursoComp) registry.lookup("RecursoComp");
 
-            System.out.println("Entre com o Identificador para esse processo");
+            System.out.println("Entre com o Identificador para esse processo"); //ver como o Ramyres fez. Portas talvez?
             String id = br.readLine();
 
-            System.out.println("entre a operacao que deseja ser feita: Criar[1] Ler[2]");
+            System.out.println("entre a operacao que deseja ser feita: Criar[1] Ler[2] arquivo");
             while(looping) {
                 String key = br.readLine();
                 try {

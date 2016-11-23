@@ -30,27 +30,34 @@ public class ProxyReal extends MapaDeReplicacao implements Proxy{
 		String s =Integer.toString(t);
 		return s;
 	}
-	public boolean createFile( String filename) throws RemoteException, FileNotFoundException, IOException {
+	public boolean createFile(String filename) throws RemoteException, FileNotFoundException, IOException {
 		return false;
 	}
-	public String readFile (String filename) throws RemoteException, FileNotFoundException, IOException {
-		return "";
+	public String readFile(String filename) throws RemoteException, FileNotFoundException, IOException {
+		int partition = md5(filename);
+		//searchPartition(filename, partition); //botar a logica pra decidir qual no
 	}	 
-	public String searchPartition (String path, String key) throws RemoteException, FileNotFoundException, IOException {
-		BufferedReader br = new BufferedReader(new FileReader(path));
-        String str = "";
-        for (String linha = br.readLine(); linha != null; linha = br.readLine()) {
-                if(linha.contains(key+":")){
-                    str = linha.substring(linha.indexOf(":") + 1);
-                   // nos.addAll(Arrays.asList(str.split("\\s*;\\s*")));
-                	return str;
-                }
-        }
-        br.close();
-        return str;
-	}
 	public boolean status()  throws RemoteException {
 		return false;
 	}
+	private List<String> searchPartition(String path, String Pesq) throws IOException {
+        BufferedReader buffRead = new BufferedReader(new FileReader(path));
+        String linha = "";
+        List<String> nos = new ArrayList<String>();
+        while (true) {
+            if (linha != null) {
+                if(linha.contains(Pesq+":")){
+                    String str = linha.substring(linha.indexOf(":") + 1);
+                    nos.addAll(Arrays.asList(str.split("\\s*;\\s*")));
+                	return nos;
+                }
+
+            } else
+                break;
+            linha = buffRead.readLine();
+        }
+        buffRead.close();
+        return nos;
+    }
 
 }
