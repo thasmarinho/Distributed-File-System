@@ -6,7 +6,7 @@ import java.io.IOException;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 
-public interface ProxyImplement extends Remote   {
+public interface Proxy extends Remote   {
 	
 	 boolean createFile( String filename) throws RemoteException, FileNotFoundException, IOException;
 	 
