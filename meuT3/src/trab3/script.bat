@@ -31,16 +31,16 @@ echo No5 criado
 Start java trab3.NoArmazenamento
 pause
 echo No6 criado
-Start java trab3.Balancer
+Start java trab3.BalanceadorDeCargas
 pause
 echo Balancer criado
-Start java trab3.Proxys
+Start java trab3.ProxyReal
 pause
 echo Proxy1 criado
-Start java trab3.Proxys
+Start java trab3.ProxyReal
 pause
 echo Proxy2 criado
-Start java trab3.Proxys
+Start java trab3.ProxyReal
 pause
 echo Proxy3 criado
 Start java trab3.Client
