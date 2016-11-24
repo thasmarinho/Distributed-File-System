@@ -8,33 +8,45 @@ cls
 @echo    ***********************************************
 @echo.
 pause
-cd C:\Users\Thais\Documents\GitHub\Distributed-File-System
+cd C:\Users\Bruno Augusto\Desktop\meuT3\src\trab3
 javac *.java
+cd..
 pause
 echo Arquivos .java compilados com sucesso!
-java NoDeArmazenamento.java
+Start java trab3.NoArmazenamento
+pause
 echo No1 criado
-java NoDeArmazenamento.java
+Start java trab3.NoArmazenamento
+pause
 echo No2 criado
-java NoDeArmazenamento.java
+Start java trab3.NoArmazenamento
+pause
 echo No3 criado
-java NoDeArmazenamento.java
+Start java trab3.NoArmazenamento
+pause
 echo No4 criado
-java NoDeArmazenamento.java
+Start java trab3.NoArmazenamento
+pause
 echo No5 criado
-java NoDeArmazenamento.java
+Start java trab3.NoArmazenamento
+pause
 echo No6 criado
+Start java trab3.Balancer
 pause
-java ProxyReal.java
+echo Balancer criado
+Start java trab3.Proxys
+pause
 echo Proxy1 criado
+Start java trab3.Proxys
 pause
-java Balanceador.java
-echo Balanceador criado
+echo Proxy2 criado
+Start java trab3.Proxys
 pause
-java Cliente.java
-echo Cliente criado
+echo Proxy3 criado
+Start java trab3.Client
 pause
-cls
+echo client criado
+pause
 @echo.
 @echo    ***********************************************
 @echo    ***                                         ***
@@ -42,4 +54,4 @@ cls
 @echo    ***                                         ***
 @echo    ***********************************************
 @echo.
-echo Entre a operacao que deseja realizar: Criar[1] Ler[2] arquivo
+pause
