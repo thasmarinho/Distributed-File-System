@@ -13,7 +13,7 @@ import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.Scanner;
 
-public class NoArmazenamento implements NoImplement {
+public class NoArmazenamento implements No {
 
 	static String Path;
 	static File Folder;
@@ -34,7 +34,7 @@ public class NoArmazenamento implements NoImplement {
 	    	System.out.println("turning on Storage Node : "+Path);
 	        try {
 	        	NoArmazenamento obj = new NoArmazenamento();
-	        	NoImplement stub = (NoImplement) UnicastRemoteObject.exportObject(obj, 0);
+	        	No stub = (No) UnicastRemoteObject.exportObject(obj, 0);
 	            Registry registry = LocateRegistry.createRegistry(PortOfStorage);
 	            registry.bind("Hello", stub);
 	            System.out.println("Port:"+PortOfStorage);
