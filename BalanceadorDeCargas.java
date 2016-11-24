@@ -19,6 +19,9 @@ public class BalanceadorDeCargas implements Balanceador {
     public int getProxy() throws RemoteException, NotBoundException {
         return 0;
     }
+	
+	/*
+	Metodo me parece inutil, vestigio de codigo passado
 	public String operation(String key, String id) throws RemoteException {
 		
 		String response = "";
@@ -37,7 +40,7 @@ public class BalanceadorDeCargas implements Balanceador {
       } 
 		
 		return response;
-	}
+	}*/
 	     
     public static void main(String args[]) {
         
