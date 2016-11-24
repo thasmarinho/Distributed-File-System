@@ -15,8 +15,11 @@ import java.rmi.server.UnicastRemoteObject;
 import java.util.Scanner;
 import java.security.*;
 import java.math.BigInteger;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
-public class ProxysReal implements Proxy {
+public class ProxyReal implements Proxy {
 
 	 static No stubNo1;
 	 static No stubNo2;
@@ -36,8 +39,8 @@ public class ProxysReal implements Proxy {
             
            
             
-        	Proxys obj = new Proxys();
-        	Proxy stubProxy = (Proxy) UnicastRemoteObject.exportObject(obj, 0);
+        	ProxyReal obj = new ProxyReal(); 
+			Proxy stubProxy=(Proxy)UnicastRemoteObject.exportObject(obj, 0);
             Registry registry = LocateRegistry.createRegistry(PortOfProxy);
             registry.bind("Hello", stubProxy);
             System.out.println(" Port:"+PortOfProxy);
@@ -85,10 +88,6 @@ public class ProxysReal implements Proxy {
         System.out.println(" Connected with node 6");
         System.out.println(" At Port: "+no6);
         
-
-
-        
-
         
         Registry registry7 = LocateRegistry.getRegistry(1010);
         Balanceador stubBalancer = (Balanceador) registry7.lookup("Hello");     
@@ -102,84 +101,88 @@ public class ProxysReal implements Proxy {
 
 	@Override
 	public boolean createFile(String filename) throws IOException {
-		 int partition = hashing(filename);
-		 String s=null, aux[];
-		 boolean result = false;
+		 int partition = md5(filename);
+		 String str=null, nos[];
+		 boolean resultado = false;
 		 InputStream is = new FileInputStream("MAP.txt");
 	     InputStreamReader isr = new InputStreamReader(is);
-	     BufferedReader br = new BufferedReader(isr);
+		BufferedReader br = new BufferedReader(isr);
+ 
 		 for(int i=0; i<= partition ; i++ ){
-			 s = br.readLine();
+			 str = br.readLine();
 		 }
-		 aux = s.split(";");
-		 for(int i=0;i<aux.length;i++){
-			switch (Integer.parseInt(aux[i])) {
+		 nos = str.split("\\s*;\\s*");
+		 
+		 for(int i=0;i<nos.length;i++){
+			switch (Integer.parseInt(nos[i])) {
 			case 1:
-				result = stubNo1.createFile(filename);
+				resultado = stubNo1.createFile(filename);
 				break;
 			case 2:
-				result = stubNo2.createFile(filename);
+				resultado = stubNo2.createFile(filename);
 				break;
 			case 3:
-				result = stubNo3.createFile(filename);
+				resultado = stubNo3.createFile(filename);
 				break;
 			case 4:
-				result = stubNo4.createFile(filename);
+				resultado = stubNo4.createFile(filename);
 				break;
 			case 5:
-				result = stubNo5.createFile(filename);
+				resultado = stubNo5.createFile(filename);
 				break;
 			case 6:
-				result = stubNo6.createFile(filename);
+				resultado = stubNo6.createFile(filename);
 				break;
 			default:
 				break;
 			}
 		 }
-		return result;
+		return resultado;
 	}
 
 	@Override
 	public String readFile(String filename) throws IOException {
-		int partition = hashing(filename);
-		 String s=null, aux[], result = null;
+		int partition = md5(filename);
+		 String str = null, nos[], resultado = null;
 		 boolean FlagFind = false;
 		 InputStream is = new FileInputStream("MAP.txt");
 	     InputStreamReader isr = new InputStreamReader(is);
 	     BufferedReader br = new BufferedReader(isr);
+		 
 		 for(int i=0; i<= partition ; i++ ){
-			 s = br.readLine();
+			 str = br.readLine();
 		 }
-		 aux = s.split(";");
-		 for(int i=0;i<aux.length;i++){
-			 try{				switch (Integer.parseInt(aux[i])) {
+		 nos = str.split("\\s*;\\s*");
+		 
+		 for(int i=0;i<nos.length;i++){
+			 try{				switch (Integer.parseInt(nos[i])) {
 				case 1:
-					if((result = stubNo1.readFile(filename)) != null){
+					if((resultado = stubNo1.readFile(filename)) != null){
 						FlagFind =true;
 					 };
 					break;
 				case 2:
-					if((result = stubNo2.readFile(filename)) != null){
+					if((resultado = stubNo2.readFile(filename)) != null){
 						FlagFind =true;
 					 };
 					break;
 				case 3:
-					if((result = stubNo3.readFile(filename)) != null){
+					if((resultado = stubNo3.readFile(filename)) != null){
 						FlagFind =true;
 					 };
 					break;
 				case 4:
-					if((result = stubNo4.readFile(filename)) != null){
+					if((resultado = stubNo4.readFile(filename)) != null){
 						FlagFind =true;
 					 };
 					break;
 				case 5:
-					if((result = stubNo5.readFile(filename)) != null){
+					if((resultado = stubNo5.readFile(filename)) != null){
 						FlagFind =true;
 					 };
 					break;
 				case 6:
-					if((result = stubNo6.readFile(filename)) != null){
+					if((resultado = stubNo6.readFile(filename)) != null){
 						FlagFind =true;
 					 };
 					break;
@@ -193,11 +196,11 @@ public class ProxysReal implements Proxy {
         }
 
 		}
-		return result;
+		return resultado;
 	}
 
 	
-	public int hashing(String senha){
+	public int md5(String senha){
 		MessageDigest md = null;
 		try {
 			md = MessageDigest.getInstance("MD5");
@@ -216,6 +219,31 @@ public class ProxysReal implements Proxy {
 
 		return true;
 	}
+	
+	private List<String> searchPartition(String key) throws IOException {
+		//String s =Integer.toString(key);
+		InputStream is = new FileInputStream("MAP.txt");
+	    InputStreamReader isr = new InputStreamReader(is);
+	    BufferedReader br = new BufferedReader(isr);
+        //BufferedReader buffRead = new BufferedReader(new FileReader("MAP.txt"));
+        String linha = "";
+        List<String> nos = new ArrayList<String>();
+        while (true) {
+            if (linha != null) {
+                if(linha.contains(key+":")){
+                    String str = linha.substring(linha.indexOf(":") + 1);
+                    nos.addAll(Arrays.asList(str.split("\\s*;\\s*")));
+                	return nos;
+                }
+
+            } else
+                break;
+            linha = br.readLine();
+        }
+        br.close();
+        return nos;
+    }
+
 	
 	
 	

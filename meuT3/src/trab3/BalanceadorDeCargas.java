@@ -48,7 +48,7 @@ public class BalanceadorDeCargas implements Balanceador{
 		
 		for(int i=0;i<=max;i++){
 			try{Registry registry = LocateRegistry.getRegistry(ListOfProxys.get(i));
-	        ProxyImplement stub2 = (ProxyImplement) registry.lookup("Hello");     
+	        Proxy stub2 = (Proxy) registry.lookup("Hello");     
 	        System.out.println("Conection Sucesfull with Proxy Server");
 	        System.out.println(" Server:"+ListOfProxys.get(i)+"\n");
 	        check = stub2.status();

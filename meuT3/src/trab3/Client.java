@@ -13,7 +13,7 @@ public class Client {
 	public static void main(String[] args) throws NotBoundException, FileNotFoundException, IOException {
 
 		Registry registry = LocateRegistry.getRegistry(1010);
-		BalanceadorImplement stub = (BalanceadorImplement) registry.lookup("Hello");     
+		Balanceador stub = (Balanceador) registry.lookup("Hello");     
         System.out.println(" Conection Balancer \n ");
         System.out.println(" Server:"+1010+"\n");
         
@@ -22,13 +22,13 @@ public class Client {
 		
 		
 		Registry registry2 = LocateRegistry.getRegistry(PortOfProxy);
-		ProxyImplement stub2 = (ProxyImplement) registry2.lookup("Hello");     
+		Proxy stub2 = (Proxy) registry2.lookup("Hello");     
         System.out.println(" conection Proxy\n ");
         System.out.println(" Server:"+PortOfProxy+"\n");
         
         
 while(true){
-			System.out.println("operacao?(l/c)");
+			System.out.println("Qual operacao deseja executar: criar [c] , ler [l]");
 		Scanner sc1 = new Scanner(System.in); 
     	String ans = sc1.next();
     	
