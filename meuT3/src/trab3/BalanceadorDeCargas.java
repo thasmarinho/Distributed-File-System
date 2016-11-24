@@ -8,7 +8,7 @@ import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class BalancerOfPayload implements Balanceador{
+public class BalanceadorDeCargas implements Balanceador{
 	
 	static ArrayList <Integer> ListOfProxys;
 	
@@ -25,7 +25,7 @@ public class BalancerOfPayload implements Balanceador{
         try {
             
            
-        	BalancerOfPayload obj = new BalancerOfPayload();
+        	BalanceadorDeCargas obj = new BalanceadorDeCargas();
         	Balanceador stub = (Balanceador) UnicastRemoteObject.exportObject(obj, 0);
             Registry registry = LocateRegistry.createRegistry(PortOfBalancer);
             registry.bind("Hello", stub);
