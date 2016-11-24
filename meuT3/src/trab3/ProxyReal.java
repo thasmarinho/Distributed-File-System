@@ -16,14 +16,14 @@ import java.util.Scanner;
 import java.security.*;
 import java.math.BigInteger;
 
-public class Proxys implements ProxyImplement {
+public class ProxysReal implements Proxy {
 
-	 static NoImplement stubNo1;
-	 static NoImplement stubNo2;
-	 static NoImplement stubNo3;
-	 static NoImplement stubNo4;
-	 static NoImplement stubNo5;
-	 static NoImplement stubNo6;
+	 static No stubNo1;
+	 static No stubNo2;
+	 static No stubNo3;
+	 static No stubNo4;
+	 static No stubNo5;
+	 static No stubNo6;
 	 
 	public static void main(String[] args) throws NotBoundException, IOException {
 	
@@ -37,7 +37,7 @@ public class Proxys implements ProxyImplement {
            
             
         	Proxys obj = new Proxys();
-        	ProxyImplement stubProxy = (ProxyImplement) UnicastRemoteObject.exportObject(obj, 0);
+        	Proxy stubProxy = (Proxy) UnicastRemoteObject.exportObject(obj, 0);
             Registry registry = LocateRegistry.createRegistry(PortOfProxy);
             registry.bind("Hello", stubProxy);
             System.out.println(" Port:"+PortOfProxy);
@@ -56,32 +56,32 @@ public class Proxys implements ProxyImplement {
         
         
         Registry registry1 = LocateRegistry.getRegistry(no1);
-        stubNo1 = (NoImplement) registry1.lookup("Hello");     
+        stubNo1 = (No) registry1.lookup("Hello");     
         System.out.println(" Connected with node 1");
         System.out.println(" At Port: "+no1);
 
         Registry registry2 = LocateRegistry.getRegistry(no2);
-        stubNo2 = (NoImplement) registry2.lookup("Hello");     
+        stubNo2 = (No) registry2.lookup("Hello");     
         System.out.println(" Connected with node 2");
         System.out.println(" At Port: "+no2);
         
         Registry registry3 = LocateRegistry.getRegistry(no3);
-        stubNo3 = (NoImplement) registry3.lookup("Hello");     
+        stubNo3 = (No) registry3.lookup("Hello");     
         System.out.println(" Connected with node 3");
         System.out.println(" At Port: "+no3);
         
         Registry registry4 = LocateRegistry.getRegistry(no4);
-        stubNo4 = (NoImplement) registry4.lookup("Hello");     
+        stubNo4 = (No) registry4.lookup("Hello");     
         System.out.println(" Connected with node 4");
         System.out.println(" At Port: "+no4);
         
         Registry registry5 = LocateRegistry.getRegistry(no5);
-        stubNo5 = (NoImplement) registry5.lookup("Hello");     
+        stubNo5 = (No) registry5.lookup("Hello");     
         System.out.println(" Connected with node 5");
         System.out.println(" At Port: "+no5);
         
         Registry registry6 = LocateRegistry.getRegistry(no6);
-        stubNo6 = (NoImplement) registry6.lookup("Hello");     
+        stubNo6 = (No) registry6.lookup("Hello");     
         System.out.println(" Connected with node 6");
         System.out.println(" At Port: "+no6);
         
@@ -91,7 +91,7 @@ public class Proxys implements ProxyImplement {
 
         
         Registry registry7 = LocateRegistry.getRegistry(1010);
-        BalanceadorImplement stubBalancer = (BalanceadorImplement) registry7.lookup("Hello");     
+        Balanceador stubBalancer = (Balanceador) registry7.lookup("Hello");     
         System.out.println("Connected with Balancer");
         System.out.println(" At Port:"+1010);
 
