@@ -9,14 +9,11 @@ public class Cliente{
     public static void main(String[] args) {
 
         String host = (args.length < 1) ? null : args[0];
-        int porta = 1099;
+        int porta = 4000;
         try {
             BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
             Registry registry = LocateRegistry.getRegistry(host, porta); //host, porta
             Balanceador stub = (Balanceador) registry.lookup("Balanceador");
-
-      
-          
 
             porta = stub.getProxy();
 
